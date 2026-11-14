@@ -1,0 +1,25 @@
+# Logs & temporary files
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Database data
+server/data/
+*.log
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Production build output
+client/dist/
+dist/
+
+# Editor & OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

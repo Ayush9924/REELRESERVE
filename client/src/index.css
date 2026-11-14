@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #101014;
+    color: #F6F2ED;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+/* Custom scrollbar for cinema elegance */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #101014;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #282834;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #791D35;
+}
+
+/* Screen curve aesthetic */
+.cinema-screen-curve {
+  box-shadow: 0 16px 30px -10px rgba(214, 168, 95, 0.45);
+}
+
