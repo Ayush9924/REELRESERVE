@@ -25,16 +25,23 @@ export const OTHER_CITIES = [
 
 export const LocationProvider = ({ children }) => {
   const [selectedCity, setSelectedCity] = useState(() => {
-    return localStorage.getItem('reel_reserve_city') || 'Mumbai';
+    return localStorage.getItem('reel_reserve_city') || '';
   });
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  // Mandatory prompt on opening: if user hasn't selected a city yet, open modal immediately
+  const [isModalOpen, setIsModalOpen] = useState(() => {
+    return !localStorage.getItem('reel_reserve_city');
+  });
 
   useEffect(() => {
-    localStorage.setItem('reel_reserve_city', selectedCity);
+    if (selectedCity) {
+      localStorage.setItem('reel_reserve_city', selectedCity);
+    }
   }, [selectedCity]);
 
   const selectCity = (city) => {
     setSelectedCity(city);
+    localStorage.setItem('reel_reserve_city', city);
     setIsModalOpen(false);
   };
 
@@ -55,3 +62,4 @@ export const LocationProvider = ({ children }) => {
 };
 
 export const useLocation = () => useContext(LocationContext);
+

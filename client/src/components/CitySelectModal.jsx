@@ -47,16 +47,24 @@ const CitySelectModal = () => {
         {/* Search header */}
         <div className="p-6 border-b border-surface-border space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-accent" />
-              Select Your City
-            </h3>
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="p-1 rounded-lg text-text-muted hover:text-text-primary hover:bg-surface-light transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            <div>
+              <h3 className="font-display text-lg font-bold text-text-primary flex items-center gap-2">
+                <MapPin className="w-5 h-5 text-accent" />
+                Select Your Location
+              </h3>
+              <p className="text-xs text-text-muted mt-0.5">
+                Choose your city to view nearby cinemas, auditoriums, and local showtimes
+              </p>
+            </div>
+            {/* Only allow closing if a city has already been chosen before */}
+            {selectedCity && (
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="p-1.5 rounded-lg text-text-muted hover:text-text-primary hover:bg-surface-light transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            )}
           </div>
 
           {/* Search Input */}
@@ -154,3 +162,4 @@ const CitySelectModal = () => {
 };
 
 export default CitySelectModal;
+

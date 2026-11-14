@@ -80,7 +80,7 @@ const Navbar = () => {
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-light hover:bg-surface-border text-xs font-semibold text-text-primary border border-surface-border transition-all hover:scale-105 shadow-sm"
           >
             <MapPin className="w-3.5 h-3.5 text-accent" />
-            <span className="font-medium text-accent">{selectedCity}</span>
+            <span className="font-medium text-accent">{selectedCity || 'Select City'}</span>
             <ChevronDown className="w-3 h-3 text-text-muted" />
           </button>
         </nav>
