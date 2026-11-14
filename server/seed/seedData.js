@@ -135,7 +135,7 @@ const seedDatabase = async () => {
       },
       {
         title: 'K.G.F: Chapter 2',
-        description: 'In the blood-soaked Kolar Gold Fields, Rocky\'s name strikes fear into his foes. While his allies look up to him, the government sees him as a danger to law and order.',
+        description: "In the blood-soaked Kolar Gold Fields, Rocky's name strikes fear into his foes. While his allies look up to him, the government sees him as a danger to law and order.",
         poster: 'https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=600&auto=format&fit=crop',
         backdrop: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop',
         genre: ['Action', 'Crime', 'Drama'],
@@ -182,7 +182,7 @@ const seedDatabase = async () => {
       },
       {
         title: 'Oppenheimer (70mm Laser Edition)',
-        description: 'The monumental story of American theoretical physicist J. Robert Oppenheimer and his director role at the Manhattan Project\'s Los Alamos Laboratory.',
+        description: "The monumental story of American theoretical physicist J. Robert Oppenheimer and his director role at the Manhattan Project's Los Alamos Laboratory.",
         poster: 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=600&auto=format&fit=crop',
         backdrop: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1200&auto=format&fit=crop',
         genre: ['Biography', 'Drama', 'History'],
@@ -197,7 +197,7 @@ const seedDatabase = async () => {
       },
       {
         title: 'Interstellar: 10th Anniversary Laser',
-        description: 'When Earth becomes uninhabitable, Joseph Cooper pilots an interstellar expedition through a newly formed wormhole near Saturn to ensure humanity\'s survival.',
+        description: "When Earth becomes uninhabitable, Joseph Cooper pilots an interstellar expedition through a newly formed wormhole near Saturn to ensure humanity's survival.",
         poster: 'https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=600&auto=format&fit=crop',
         backdrop: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop',
         genre: ['Sci-Fi', 'Adventure', 'Drama'],
@@ -260,7 +260,7 @@ const seedDatabase = async () => {
     const movies = await Movie.insertMany(moviesData);
     console.log(`[Seed] Seeded ${movies.length} Bollywood & Hollywood films`);
 
-    // 3. Seed Premier Cinema Complexes Across India (PVR INOX, Cinepolis, IMAX)
+    // 3. Comprehensive Theaters Across All Major Cities (PVR, INOX, IMAX, Cinépolis, Miraj, Wave)
     const cinemasData = [
       // Mumbai
       {
@@ -277,9 +277,24 @@ const seedDatabase = async () => {
         facilities: ['4DX Dynamic Motion', 'Dolby Atmos', 'VIP Lounges'],
         screensCount: 5,
       },
+      {
+        name: 'INOX Megaplex R-City Ghatkopar',
+        city: 'Mumbai',
+        address: 'R-City Mall, LBS Marg, Ghatkopar West',
+        facilities: ['IMAX Laser', 'Samsung Onyx LED', 'ScreenX 270°', 'INSIGNIA Lounge'],
+        screensCount: 9,
+      },
+      {
+        name: 'Miraj Cinemas Wadala IMAX',
+        city: 'Mumbai',
+        address: 'Bhakti Park, Anik Wadala Link Road, Wadala East',
+        facilities: ['IMAX Dome Screen', 'Dolby Atmos', 'Recliner Pods'],
+        screensCount: 5,
+      },
+
       // Delhi-NCR
       {
-        name: 'PVR Director\'s Cut Ambience',
+        name: "PVR Director's Cut Ambience",
         city: 'Delhi-NCR',
         address: 'Ambience Island, NH-8, DLF Phase 3, Gurugram',
         facilities: ['Luxury Recliner Lounges', 'Dolby Atmos', 'Concierge Service'],
@@ -292,6 +307,21 @@ const seedDatabase = async () => {
         facilities: ['IMAX Laser', 'MX4D', 'Dolby Atmos', 'In-Seat Butler'],
         screensCount: 6,
       },
+      {
+        name: 'PVR Superplex Vegas Mall Dwarka',
+        city: 'Delhi-NCR',
+        address: 'Sector 14, Dwarka, New Delhi',
+        facilities: ['IMAX with Laser', '4DX Motion', 'Playhouse for Kids', 'Dolby Atmos'],
+        screensCount: 12,
+      },
+      {
+        name: 'Cinépolis DLF Avenue Saket',
+        city: 'Delhi-NCR',
+        address: 'DLF Avenue, Press Enclave Road, Saket, New Delhi',
+        facilities: ['Macro XE Large Format Screen', 'Dolby Atmos', 'Coffeehouse Concessions'],
+        screensCount: 6,
+      },
+
       // Bengaluru
       {
         name: 'PVR Superplex Forum South',
@@ -307,9 +337,24 @@ const seedDatabase = async () => {
         facilities: ['INSIGNIA Luxury Lounge', 'Dolby Atmos', 'Valet Parking'],
         screensCount: 5,
       },
+      {
+        name: 'PVR VR Bengaluru IMAX',
+        city: 'Bengaluru',
+        address: 'VR Bengaluru, ITPL Main Road, Whitefield',
+        facilities: ['IMAX Laser', 'Gold Class Recliners', 'Dolby 7.1 Surround'],
+        screensCount: 9,
+      },
+      {
+        name: 'Cinépolis Orion Mall Rajajinagar',
+        city: 'Bengaluru',
+        address: 'Orion Mall, Brigade Gateway, Dr. Rajkumar Road',
+        facilities: ['VIP Recliner Service', 'Dolby Atmos', 'Laser Projection'],
+        screensCount: 11,
+      },
+
       // Hyderabad
       {
-        name: 'Prasad\'s Multiplex & Large Screen',
+        name: "Prasad's Multiplex & Large Screen",
         city: 'Hyderabad',
         address: 'NTR Gardens, Khairatabad, Central Hyderabad',
         facilities: ['Giant Laser Screen', 'Dolby Atmos', 'Recliner Seating'],
@@ -322,7 +367,22 @@ const seedDatabase = async () => {
         facilities: ['IMAX with Laser', '4DX Motion', 'Food Court'],
         screensCount: 6,
       },
-      // Chandigarh / Jalandhar (Punjab)
+      {
+        name: 'AMB Cinemas Gachibowli',
+        city: 'Hyderabad',
+        address: 'Sarath City Capital Mall, Gachibowli - Miyapur Road',
+        facilities: ['Laser Projection VIP', 'Dolby Atmos', 'M-Lounge Recliners'],
+        screensCount: 8,
+      },
+      {
+        name: 'Cinépolis CCPL Mall Malkajgiri',
+        city: 'Hyderabad',
+        address: 'CCPL Mall, Geeta Nagar, Malkajgiri',
+        facilities: ['Dolby Atmos Sound', 'Plush Push-back Seats', 'Gourmet Kitchen'],
+        screensCount: 5,
+      },
+
+      // Chandigarh
       {
         name: 'PVR Elante IMAX',
         city: 'Chandigarh',
@@ -331,12 +391,43 @@ const seedDatabase = async () => {
         screensCount: 8,
       },
       {
+        name: 'INOX Fun Republic Mall',
+        city: 'Chandigarh',
+        address: 'Fun Republic Mall, Dhillon Complex, Manimajra',
+        facilities: ['Dolby 7.1', 'Executive Recliner Rows', 'Express Concessions'],
+        screensCount: 4,
+      },
+      {
+        name: 'Cinépolis Jagat Mall Sector 17',
+        city: 'Chandigarh',
+        address: 'Bridge Market, Sector 17-C, Chandigarh',
+        facilities: ['Dolby Atmos', 'VIP Seating', 'Laser Clear Projection'],
+        screensCount: 3,
+      },
+
+      // Jalandhar (Punjab)
+      {
         name: 'PVR Curo High Street',
         city: 'Jalandhar',
         address: 'Curo High Street Mall, 66 Feet Road, Jalandhar',
         facilities: ['Dolby 7.1 Surround', 'Recliner Lounges', 'Prime Seating'],
         screensCount: 4,
       },
+      {
+        name: 'INOX Westend Mall',
+        city: 'Jalandhar',
+        address: 'Westend Mall, Near BMC Chowk, GT Road, Jalandhar',
+        facilities: ['Dolby Atmos Sound', 'Executive Recliners', 'Café Unwind'],
+        screensCount: 5,
+      },
+      {
+        name: 'Cinépolis Viva City Mall',
+        city: 'Jalandhar',
+        address: 'Viva City Mall, Rama Mandi, Hoshiarpur Road, Jalandhar',
+        facilities: ['RealD 3D', 'Dolby Digital', 'Comfort Club Recliners'],
+        screensCount: 4,
+      },
+
       // Pune
       {
         name: 'PVR ICON Pavillion',
@@ -345,6 +436,21 @@ const seedDatabase = async () => {
         facilities: ['4DX', 'Dolby Atmos', 'Gold Class Recliners'],
         screensCount: 6,
       },
+      {
+        name: 'Cinépolis Seasons Mall Magarpatta',
+        city: 'Pune',
+        address: 'Seasons Mall, Magarpatta City, Hadapsar, Pune',
+        facilities: ['IMAX Laser', 'VIP Class', '4DX Motion Theater'],
+        screensCount: 15,
+      },
+      {
+        name: 'INOX Westend Mall Aundh',
+        city: 'Pune',
+        address: 'Westend Mall, Harmony Society, Ward No. 8, Aundh',
+        facilities: ['INSIGNIA Luxury Screens', 'Dolby Atmos', 'Live Kitchen Menu'],
+        screensCount: 8,
+      },
+
       // Chennai
       {
         name: 'SPI Escape Cinemas Express Avenue',
@@ -353,6 +459,21 @@ const seedDatabase = async () => {
         facilities: ['Dolby Atmos', 'Sensory 4D', 'Gourmet Concessions'],
         screensCount: 8,
       },
+      {
+        name: 'PVR LUXE & IMAX Phoenix Marketcity',
+        city: 'Chennai',
+        address: 'Phoenix Marketcity, Velachery Main Road, Chennai',
+        facilities: ['IMAX Laser', 'LUXE Luxury Dine-In', 'Dolby Atmos'],
+        screensCount: 11,
+      },
+      {
+        name: 'INOX Palazzo Mall Vadapalani',
+        city: 'Chennai',
+        address: 'Nexus Vijaya Mall, Arcot Road, Vadapalani',
+        facilities: ['Palazzo Italian Architecture', 'IMAX Laser', 'Dolby Atmos'],
+        screensCount: 9,
+      },
+
       // Kolkata
       {
         name: 'INOX Quest Mall INSIGNIA',
@@ -361,6 +482,21 @@ const seedDatabase = async () => {
         facilities: ['INSIGNIA 7-Star', 'Laser Projection', 'Dolby Atmos'],
         screensCount: 5,
       },
+      {
+        name: 'PVR South City IMAX',
+        city: 'Kolkata',
+        address: 'South City Mall, Prince Anwar Shah Road, Jadavpur',
+        facilities: ['IMAX Laser', 'Gold Lounge', 'Dolby Atmos Sound'],
+        screensCount: 6,
+      },
+      {
+        name: 'Cinépolis Acropolis Mall',
+        city: 'Kolkata',
+        address: 'Acropolis Mall, Rajdanga Main Road, Kasba',
+        facilities: ['Dolby Atmos', 'VIP Recliners', 'RealD 3D Screen'],
+        screensCount: 4,
+      },
+
       // Ahmedabad
       {
         name: 'PVR Acropolis Mall',
@@ -369,6 +505,21 @@ const seedDatabase = async () => {
         facilities: ['Dolby 7.1', 'Gold Lounges', 'Valet Parking'],
         screensCount: 6,
       },
+      {
+        name: 'Cinépolis AlphaOne Mall Vastrapur',
+        city: 'Ahmedabad',
+        address: 'Ahmedabad One Mall, Vastrapur Lake, Ahmedabad',
+        facilities: ['VIP Recliner Auditorium', 'Dolby Atmos', 'Gourmet Snacks'],
+        screensCount: 6,
+      },
+      {
+        name: 'INOX Himalaya Mall Drive-In Road',
+        city: 'Ahmedabad',
+        address: 'Himalaya Mall, Gurukul, Drive-In Road, Ahmedabad',
+        facilities: ['Dolby Atmos 7.1', 'Laser Sharp Visuals', 'Prime Seating'],
+        screensCount: 5,
+      },
+
       // Kochi
       {
         name: 'PVR Lulu International Shopping Mall',
@@ -376,6 +527,130 @@ const seedDatabase = async () => {
         address: 'Lulu Mall, Edappally, Kochi, Kerala',
         facilities: ['IMAX Laser', '4DX Motion', 'Dolby Atmos Multi-channel'],
         screensCount: 9,
+      },
+      {
+        name: 'Cinépolis Centre Square Mall',
+        city: 'Kochi',
+        address: 'Centre Square Mall, MG Road, Shenoys, Kochi',
+        facilities: ['Dolby Atmos VIP', 'Recliner Seats', 'RealD 3D'],
+        screensCount: 11,
+      },
+      {
+        name: 'INOX Oberon Mall Edappally',
+        city: 'Kochi',
+        address: 'Oberon Mall, NH 66 Bypass, Edappally',
+        facilities: ['Dolby Surround Sound', 'Club Class Lounges', 'Café Bites'],
+        screensCount: 4,
+      },
+
+      // Jaipur
+      {
+        name: 'PVR GT Central Mall',
+        city: 'Jaipur',
+        address: 'GT Central Mall, Malviya Nagar, Jaipur',
+        facilities: ['IMAX with Laser', 'Gold Class Recliners', 'Dolby Atmos'],
+        screensCount: 6,
+      },
+      {
+        name: 'INOX Crystal Palm Mall C-Scheme',
+        city: 'Jaipur',
+        address: 'Crystal Palm, Sahakar Marg, 22 Godam Circle, C-Scheme',
+        facilities: ['INSIGNIA Luxury Lounge', 'Dolby 7.1', 'Gourmet Dining'],
+        screensCount: 4,
+      },
+      {
+        name: 'Cinépolis World Trade Park',
+        city: 'Jaipur',
+        address: 'World Trade Park Mall, JLN Marg, Malviya Nagar',
+        facilities: ['VIP Class Recliners', 'Dolby Atmos', 'RealD 3D Screen'],
+        screensCount: 5,
+      },
+
+      // Lucknow
+      {
+        name: 'PVR Phoenix United Mall',
+        city: 'Lucknow',
+        address: 'Phoenix United Mall, Kanpur Road, Alambagh, Lucknow',
+        facilities: ['Dolby Atmos', 'Gold Class Lounges', 'Multi-cuisine Concessions'],
+        screensCount: 6,
+      },
+      {
+        name: 'INOX Riverside Mall Gomti Nagar',
+        city: 'Lucknow',
+        address: 'Riverside Mall, Vipin Khand, Gomti Nagar, Lucknow',
+        facilities: ['INSIGNIA VIP Dining', 'Dolby 7.1 Surround', 'Plush Recliners'],
+        screensCount: 4,
+      },
+      {
+        name: 'Cinépolis One Awadh Center Mall',
+        city: 'Lucknow',
+        address: 'One Awadh Center, Vibhuti Khand, Gomti Nagar',
+        facilities: ['Macro XE Large Screen', 'Dolby Atmos', 'VIP Recliners'],
+        screensCount: 8,
+      },
+
+      // Ludhiana
+      {
+        name: 'PVR Flamez Mall',
+        city: 'Ludhiana',
+        address: 'Flamez Mall, Malhar Road, Gurdev Nagar, Ludhiana',
+        facilities: ['Dolby 7.1', 'Gold Lounges', 'Valet Parking'],
+        screensCount: 4,
+      },
+      {
+        name: 'Cinépolis MBD Neopolis Mall',
+        city: 'Ludhiana',
+        address: 'MBD Neopolis Mall, Ferozepur Road, Ludhiana',
+        facilities: ['VIP Recliner Auditorium', 'Dolby Atmos', 'RealD 3D'],
+        screensCount: 5,
+      },
+
+      // Amritsar
+      {
+        name: 'INOX Nexus Amritsar Mall',
+        city: 'Amritsar',
+        address: 'Nexus Mall, Circular Road, Cantonment, Amritsar',
+        facilities: ['Dolby Atmos', 'Executive Recliner Rows', 'Café Unwind'],
+        screensCount: 5,
+      },
+      {
+        name: 'Cinépolis Mall of Amritsar',
+        city: 'Amritsar',
+        address: 'Mall of Amritsar, GT Road, Near Bus Stand, Amritsar',
+        facilities: ['Dolby Surround Sound', 'VIP Recliners', 'Gourmet Kitchen'],
+        screensCount: 4,
+      },
+
+      // Surat
+      {
+        name: 'INOX VR Surat Mall',
+        city: 'Surat',
+        address: 'VR Mall, Dumas Road, Magdalla, Surat',
+        facilities: ['IMAX Laser', 'INSIGNIA Dining', 'Dolby Atmos'],
+        screensCount: 6,
+      },
+      {
+        name: 'Cinépolis Imperial Square Mall',
+        city: 'Surat',
+        address: 'Imperial Square Mall, Adajan-Hazira Road, Surat',
+        facilities: ['Dolby Atmos', 'Club Class Seating', 'RealD 3D'],
+        screensCount: 5,
+      },
+
+      // Indore
+      {
+        name: 'PVR Treasure Island Next',
+        city: 'Indore',
+        address: 'Treasure Island Next Mall, RNT Marg, South Tukoganj, Indore',
+        facilities: ['Dolby Atmos', 'Gold Class Recliners', 'Gourmet Menu'],
+        screensCount: 5,
+      },
+      {
+        name: 'INOX C21 Mall AB Road',
+        city: 'Indore',
+        address: 'C21 Mall, Scheme 54 PU4, AB Road, Indore',
+        facilities: ['Laser Clear Sound', 'Plush Push-back Chairs', 'Dolby 7.1'],
+        screensCount: 5,
       },
     ];
 
@@ -387,7 +662,7 @@ const seedDatabase = async () => {
     for (const cinema of cinemas) {
       const s1 = await Screen.create({
         cinemaId: cinema._id,
-        name: 'Audi 1 - IMAX Laser',
+        name: 'Audi 1 - IMAX Laser & Dolby Atmos',
         screenType: 'IMAX Laser',
         capacity: 80,
         layoutConfig: {
@@ -403,7 +678,7 @@ const seedDatabase = async () => {
 
       const s2 = await Screen.create({
         cinemaId: cinema._id,
-        name: 'Audi 2 - Dolby Atmos 7.1',
+        name: 'Audi 2 - Dolby Atmos 7.1 Studio',
         screenType: 'Dolby Atmos',
         capacity: 80,
         layoutConfig: {
