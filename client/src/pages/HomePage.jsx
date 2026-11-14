@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Play, Ticket, ShieldCheck, Sparkles, ChevronRight, Star, Clapperboard, Award, Volume2 } from 'lucide-react';
+import { Play, Ticket, ShieldCheck, ChevronRight, Star, Clapperboard, Award, Volume2, Sparkles, Film } from 'lucide-react';
 import api from '../api/axios';
 import MovieCard from '../components/MovieCard';
 import { MovieGridSkeleton } from '../components/LoadingSkeleton';
@@ -12,9 +12,11 @@ const HomePage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
     const fetchMovies = async () => {
       try {
         const res = await api.get('/movies');
+        if (!isMounted) return;
         if (res.data?.success && res.data.data) {
           const movies = res.data.data;
           const showing = movies.filter((m) => m.status === 'now_showing');
@@ -22,60 +24,63 @@ const HomePage = () => {
           
           setNowShowing(showing);
           setComingSoon(upcoming);
-          // Prioritize trending blockbuster (Ramayana or top rated now showing)
+          // Prioritize Ramayana as flagship spotlight or highest rated now showing
           const trending = showing.find((m) => m.title.toLowerCase().includes('ramayana')) || showing[0] || movies[0];
           setFeaturedMovie(trending);
         }
       } catch (err) {
-        console.error('Failed to load homepage movies:', err);
+        if (isMounted) console.error('Failed to load homepage movies:', err);
       } finally {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     };
 
     fetchMovies();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
-    <div className="space-y-16 pb-16">
+    <div className="space-y-16 pb-20">
       
       {/* Cinematic Hero Section */}
-      <section className="relative min-h-[640px] lg:min-h-[720px] flex items-center justify-center overflow-hidden border-b border-surface-border">
+      <section className="relative min-h-[640px] lg:min-h-[740px] flex items-center justify-center overflow-hidden border-b border-surface-border">
         {featuredMovie ? (
           <>
             {/* Backdrop Image with Multi-Gradient Overlay */}
-            <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 z-0 select-none">
               <img
                 src={featuredMovie.backdrop || featuredMovie.poster}
                 alt={featuredMovie.title}
-                className="w-full h-full object-cover object-center filter brightness-[0.45] scale-105 transform animate-fade-in"
+                className="w-full h-full object-cover object-top sm:object-center filter brightness-[0.4] scale-105 transform animate-fade-in transition-transform duration-1000"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
-              <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-transparent"></div>
             </div>
 
             {/* Hero Content */}
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
               <div className="max-w-2xl space-y-6">
                 
-                {/* Professional Cinematic Live Tag */}
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/60 border border-white/10 backdrop-blur-md text-xs font-medium tracking-wide">
+                {/* Clean Professional Cinema Status Tag */}
+                <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-md bg-black/70 border border-white/10 backdrop-blur-md text-xs font-medium tracking-wide shadow-sm">
                   <span className="flex h-2 w-2 relative">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                   </span>
-                  <span className="text-white/90 uppercase text-[11px] font-semibold tracking-wider">Now In Theaters</span>
-                  <span className="text-white/30">•</span>
-                  <span className="text-accent text-[11px] font-medium">IMAX &amp; 4DX</span>
+                  <span className="text-white font-semibold text-[11px] uppercase tracking-wider">Now In Theaters</span>
+                  <span className="text-white/20">|</span>
+                  <span className="text-accent text-[11px] font-semibold tracking-wider">IMAX &amp; 4DX 3D</span>
                 </div>
 
-                <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-primary tracking-tight leading-tight">
+                <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-primary tracking-tight leading-tight drop-shadow-md">
                   {featuredMovie.title}
                 </h1>
 
-                <div className="flex items-center gap-4 text-sm text-text-secondary">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-text-secondary">
                   {featuredMovie.rating && (
-                    <div className="flex items-center gap-1.5 text-accent font-semibold">
+                    <div className="flex items-center gap-1.5 text-accent font-bold px-2 py-0.5 rounded bg-surface/60 border border-accent/20">
                       <Star className="w-4 h-4 fill-accent" />
                       <span>{featuredMovie.rating.toFixed(1)} / 10</span>
                     </div>
@@ -83,36 +88,36 @@ const HomePage = () => {
                   <span>•</span>
                   <span>{featuredMovie.duration} Mins</span>
                   <span>•</span>
-                  <span>{Array.isArray(featuredMovie.genre) ? featuredMovie.genre.join(', ') : featuredMovie.genre}</span>
+                  <span className="text-text-primary font-medium">{Array.isArray(featuredMovie.genre) ? featuredMovie.genre.join(', ') : featuredMovie.genre}</span>
                   {featuredMovie.certification && (
                     <>
                       <span>•</span>
-                      <span className="border border-surface-border px-1.5 py-0.5 rounded text-xs text-text-primary">
+                      <span className="border border-surface-border px-1.5 py-0.5 rounded text-[11px] font-bold text-text-secondary bg-surface/80">
                         {featuredMovie.certification}
                       </span>
                     </>
                   )}
                 </div>
 
-                <p className="text-text-secondary text-base leading-relaxed line-clamp-3">
+                <p className="text-text-secondary text-sm sm:text-base leading-relaxed line-clamp-3 max-w-xl font-normal">
                   {featuredMovie.description}
                 </p>
 
-                <div className="flex flex-wrap items-center gap-4 pt-2">
+                <div className="flex flex-wrap items-center gap-4 pt-3">
                   <Link
                     to={`/movies/${featuredMovie._id}`}
-                    className="px-6 py-3.5 rounded-xl bg-burgundy hover:bg-burgundy-hover text-white font-semibold text-sm flex items-center gap-2 shadow-glow-burgundy border border-burgundy-light/40 transition-all hover:scale-105"
+                    className="px-7 py-3.5 rounded-xl bg-burgundy hover:bg-burgundy-hover text-white font-semibold text-sm flex items-center gap-2.5 shadow-glow-burgundy border border-burgundy-light/40 transition-all hover:scale-105"
                   >
                     <Ticket className="w-4 h-4 text-accent" />
-                    Book Reserved Seats
+                    Book Reserved Tickets
                   </Link>
 
                   <Link
                     to={`/movies/${featuredMovie._id}`}
-                    className="px-6 py-3.5 rounded-xl bg-surface/80 hover:bg-surface-light border border-surface-border text-text-primary font-semibold text-sm flex items-center gap-2 backdrop-blur-md transition-all"
+                    className="px-6 py-3.5 rounded-xl bg-surface/80 hover:bg-surface-light border border-surface-border text-text-primary font-semibold text-sm flex items-center gap-2 backdrop-blur-md transition-all hover:border-accent/40"
                   >
                     <Play className="w-4 h-4 text-accent fill-accent" />
-                    View Details
+                    Details &amp; Trailer
                   </Link>
                 </div>
 
@@ -157,7 +162,7 @@ const HomePage = () => {
               <Volume2 className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="font-semibold text-text-primary text-sm">Acoustic & Laser Formats</h4>
+              <h4 className="font-semibold text-text-primary text-sm">Acoustic &amp; Laser Formats</h4>
               <p className="text-xs text-text-muted mt-1">Certified IMAX with Laser, 4DX and Dolby Atmos multi-channel auditoriums.</p>
             </div>
           </div>
@@ -178,7 +183,7 @@ const HomePage = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-3 h-8 bg-burgundy rounded-sm"></div>
+            <div className="w-2.5 h-8 bg-burgundy rounded-full"></div>
             <div>
               <h2 className="text-2xl font-display font-bold text-text-primary tracking-wide">Now Showing</h2>
               <p className="text-xs text-text-muted">Currently lighting up silver screens across premier cinemas</p>
@@ -212,7 +217,7 @@ const HomePage = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-3 h-8 bg-accent rounded-sm"></div>
+            <div className="w-2.5 h-8 bg-accent rounded-full"></div>
             <div>
               <h2 className="text-2xl font-display font-bold text-text-primary tracking-wide">Upcoming Premieres</h2>
               <p className="text-xs text-text-muted">Reserve your alerts for the most anticipated releases</p>
@@ -270,4 +275,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
