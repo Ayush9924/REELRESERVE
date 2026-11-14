@@ -260,33 +260,127 @@ const seedDatabase = async () => {
     const movies = await Movie.insertMany(moviesData);
     console.log(`[Seed] Seeded ${movies.length} Bollywood & Hollywood films`);
 
-    // 3. Seed Luxury Cinema Complexes & Auditoriums
+    // 3. Seed Premier Cinema Complexes Across India (PVR INOX, Cinepolis, IMAX)
     const cinemasData = [
+      // Mumbai
       {
-        name: 'REEL LUXE Palladium',
+        name: 'PVR INOX Palladium IMAX',
         city: 'Mumbai',
         address: 'High Street Phoenix, Senapati Bapat Marg, Lower Parel',
         facilities: ['IMAX with Laser', 'Dolby Atmos 7.1', 'Gourmet In-Seat Dining', 'Plush Recliners'],
+        screensCount: 6,
+      },
+      {
+        name: 'Cinépolis Grand Hyatt',
+        city: 'Mumbai',
+        address: 'Bandra Kurla Complex (BKC), Santacruz East',
+        facilities: ['4DX Dynamic Motion', 'Dolby Atmos', 'VIP Lounges'],
         screensCount: 5,
       },
+      // Delhi-NCR
       {
-        name: 'REEL OPUS Forum',
-        city: 'Bengaluru',
-        address: 'Forum South City Mall, Koramangala 7th Block, Hosur Main Road',
-        facilities: ['4DX Dynamic Motion', 'Dolby Atmos', 'Private Luxury Suites', 'Valet Parking'],
-        screensCount: 4,
+        name: 'PVR Director\'s Cut Ambience',
+        city: 'Delhi-NCR',
+        address: 'Ambience Island, NH-8, DLF Phase 3, Gurugram',
+        facilities: ['Luxury Recliner Lounges', 'Dolby Atmos', 'Concierge Service'],
+        screensCount: 7,
       },
       {
-        name: 'REEL REGAL Ambience',
-        city: 'Delhi NCR',
-        address: 'Ambience Island, NH 8, DLF Phase 3, Gurugram',
-        facilities: ['Dual 4K Laser Projection', 'VIP Gold Lounge', 'Dolby Surround Sound', 'Patisserie'],
+        name: 'INOX Megaplex Pacific Mall',
+        city: 'Delhi-NCR',
+        address: 'Pacific Mall, Subhash Nagar, New Delhi',
+        facilities: ['IMAX Laser', 'MX4D', 'Dolby Atmos', 'In-Seat Butler'],
         screensCount: 6,
+      },
+      // Bengaluru
+      {
+        name: 'PVR Superplex Forum South',
+        city: 'Bengaluru',
+        address: 'Konanakunte Cross, Kanakapura Road, South Bengaluru',
+        facilities: ['IMAX with Laser', '4DX Motion', 'Dolby Atmos 7.1', 'Gold Lounge'],
+        screensCount: 8,
+      },
+      {
+        name: 'INOX Nexus Koramangala',
+        city: 'Bengaluru',
+        address: 'Nexus Mall, Hosur Road, 5th Block, Koramangala',
+        facilities: ['INSIGNIA Luxury Lounge', 'Dolby Atmos', 'Valet Parking'],
+        screensCount: 5,
+      },
+      // Hyderabad
+      {
+        name: 'Prasad\'s Multiplex & Large Screen',
+        city: 'Hyderabad',
+        address: 'NTR Gardens, Khairatabad, Central Hyderabad',
+        facilities: ['Giant Laser Screen', 'Dolby Atmos', 'Recliner Seating'],
+        screensCount: 6,
+      },
+      {
+        name: 'PVR Inorbit IMAX',
+        city: 'Hyderabad',
+        address: 'Inorbit Mall, Hitech City, Madhapur',
+        facilities: ['IMAX with Laser', '4DX Motion', 'Food Court'],
+        screensCount: 6,
+      },
+      // Chandigarh / Jalandhar (Punjab)
+      {
+        name: 'PVR Elante IMAX',
+        city: 'Chandigarh',
+        address: 'Elante Mall, Industrial Area Phase 1, Chandigarh',
+        facilities: ['IMAX Laser', 'Gold Class Lounges', 'Dolby Atmos'],
+        screensCount: 8,
+      },
+      {
+        name: 'PVR Curo High Street',
+        city: 'Jalandhar',
+        address: 'Curo High Street Mall, 66 Feet Road, Jalandhar',
+        facilities: ['Dolby 7.1 Surround', 'Recliner Lounges', 'Prime Seating'],
+        screensCount: 4,
+      },
+      // Pune
+      {
+        name: 'PVR ICON Pavillion',
+        city: 'Pune',
+        address: 'The Pavillion Mall, Senapati Bapat Road, Shivajinagar',
+        facilities: ['4DX', 'Dolby Atmos', 'Gold Class Recliners'],
+        screensCount: 6,
+      },
+      // Chennai
+      {
+        name: 'SPI Escape Cinemas Express Avenue',
+        city: 'Chennai',
+        address: 'Express Avenue Mall, Whites Road, Royapettah',
+        facilities: ['Dolby Atmos', 'Sensory 4D', 'Gourmet Concessions'],
+        screensCount: 8,
+      },
+      // Kolkata
+      {
+        name: 'INOX Quest Mall INSIGNIA',
+        city: 'Kolkata',
+        address: 'Quest Mall, Syed Amir Ali Avenue, Park Circus',
+        facilities: ['INSIGNIA 7-Star', 'Laser Projection', 'Dolby Atmos'],
+        screensCount: 5,
+      },
+      // Ahmedabad
+      {
+        name: 'PVR Acropolis Mall',
+        city: 'Ahmedabad',
+        address: 'SG Highway, Thaltej, West Ahmedabad',
+        facilities: ['Dolby 7.1', 'Gold Lounges', 'Valet Parking'],
+        screensCount: 6,
+      },
+      // Kochi
+      {
+        name: 'PVR Lulu International Shopping Mall',
+        city: 'Kochi',
+        address: 'Lulu Mall, Edappally, Kochi, Kerala',
+        facilities: ['IMAX Laser', '4DX Motion', 'Dolby Atmos Multi-channel'],
+        screensCount: 9,
       },
     ];
 
     const cinemas = await Cinema.insertMany(cinemasData);
-    console.log(`[Seed] Seeded ${cinemas.length} luxury cinema complexes`);
+    console.log(`[Seed] Seeded ${cinemas.length} premier national cinemas across India`);
 
     // Create screens for each complex
     const screens = [];

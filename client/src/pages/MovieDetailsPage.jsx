@@ -3,18 +3,27 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Star, Clock, Calendar, Ticket, User, Clapperboard, MapPin, ChevronRight, AlertCircle, ArrowLeft } from 'lucide-react';
 import api from '../api/axios';
 import { useBooking } from '../context/BookingContext';
+import { useLocation } from '../context/LocationContext';
 
 const MovieDetailsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { setSelectedMovie, setSelectedCinema, setSelectedShowtime } = useBooking();
+  const { selectedCity: globalCity, setIsModalOpen, popularCities } = useLocation();
 
   const [movie, setMovie] = useState(null);
   const [showtimes, setShowtimes] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
-  const [selectedCity, setSelectedCity] = useState('All');
+  const [selectedCity, setSelectedCity] = useState(globalCity || 'All');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Sync with global header city
+  useEffect(() => {
+    if (globalCity) {
+      setSelectedCity(globalCity);
+    }
+  }, [globalCity]);
 
   useEffect(() => {
     const fetchMovieAndShows = async () => {
@@ -243,16 +252,23 @@ const MovieDetailsPage = () => {
 
             {/* City Selector */}
             <div className="flex items-center gap-2 text-xs">
-              <MapPin className="w-3.5 h-3.5 text-accent" />
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface hover:bg-surface-light border border-surface-border text-accent font-semibold transition-colors"
+              >
+                <MapPin className="w-3.5 h-3.5" />
+                <span>{selectedCity === 'All' ? 'Select City' : selectedCity}</span>
+              </button>
+
               <select
                 value={selectedCity}
                 onChange={(e) => setSelectedCity(e.target.value)}
                 className="bg-surface py-1.5 px-3 rounded-lg border border-surface-border text-text-primary focus:outline-none focus:border-accent"
               >
                 <option value="All">All Cities</option>
-                <option value="Mumbai">Mumbai</option>
-                <option value="Bengaluru">Bengaluru</option>
-                <option value="Delhi NCR">Delhi NCR</option>
+                {popularCities.map((c) => (
+                  <option key={c.name} value={c.name}>{c.name}</option>
+                ))}
               </select>
             </div>
           </div>

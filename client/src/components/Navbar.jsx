@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { Film, User, LogOut, Shield, Menu, X, Ticket } from 'lucide-react';
+import { Film, User, LogOut, Shield, Menu, X, Ticket, MapPin, ChevronDown } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useLocation } from '../context/LocationContext';
 
 const Navbar = () => {
   const { user, logout, isAdmin } = useAuth();
+  const { selectedCity, setIsModalOpen } = useLocation();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -40,7 +42,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-7">
           {navLinks.map((link) => (
             <NavLink
               key={link.path}
@@ -71,6 +73,16 @@ const Navbar = () => {
               My Bookings
             </NavLink>
           )}
+
+          {/* Location Selector Button (BookMyShow Style) */}
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-light hover:bg-surface-border text-xs font-semibold text-text-primary border border-surface-border transition-all hover:scale-105 shadow-sm"
+          >
+            <MapPin className="w-3.5 h-3.5 text-accent" />
+            <span className="font-medium text-accent">{selectedCity}</span>
+            <ChevronDown className="w-3 h-3 text-text-muted" />
+          </button>
         </nav>
 
         {/* User Account / Action Buttons */}
@@ -124,7 +136,15 @@ const Navbar = () => {
         </div>
 
         {/* Mobile menu toggle */}
-        <div className="flex md:hidden">
+        <div className="flex md:hidden items-center gap-2">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-surface text-xs font-medium text-accent border border-surface-border"
+          >
+            <MapPin className="w-3.5 h-3.5" />
+            <span className="max-w-[80px] truncate">{selectedCity}</span>
+          </button>
+
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 rounded-lg bg-surface text-text-secondary hover:text-text-primary border border-surface-border"

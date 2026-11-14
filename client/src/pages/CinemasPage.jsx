@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, Film, ScreenShare, Sparkles } from 'lucide-react';
+import { MapPin, Film, ScreenShare, Sparkles, Building2 } from 'lucide-react';
 import api from '../api/axios';
+import { useLocation } from '../context/LocationContext';
 
 const CinemasPage = () => {
+  const { selectedCity: globalCity, setIsModalOpen } = useLocation();
   const [cinemas, setCinemas] = useState([]);
-  const [selectedCity, setSelectedCity] = useState('All');
+  const [selectedCity, setSelectedCity] = useState(globalCity || 'All');
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (globalCity) {
+      setSelectedCity(globalCity);
+    }
+  }, [globalCity]);
 
   useEffect(() => {
     const fetchCinemas = async () => {
