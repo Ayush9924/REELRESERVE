@@ -58,9 +58,15 @@ const HomePage = () => {
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
               <div className="max-w-2xl space-y-6">
                 
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-burgundy/40 border border-accent/30 backdrop-blur-md text-accent text-xs font-semibold tracking-wider uppercase">
-                  <Sparkles className="w-3.5 h-3.5 text-accent" />
-                  Featured Premiering Tonight
+                {/* Professional Cinematic Live Tag */}
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/60 border border-white/10 backdrop-blur-md text-xs font-medium tracking-wide">
+                  <span className="flex h-2 w-2 relative">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
+                  <span className="text-white/90 uppercase text-[11px] font-semibold tracking-wider">Now In Theaters</span>
+                  <span className="text-white/30">•</span>
+                  <span className="text-accent text-[11px] font-medium">IMAX &amp; 4DX</span>
                 </div>
 
                 <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-primary tracking-tight leading-tight">
