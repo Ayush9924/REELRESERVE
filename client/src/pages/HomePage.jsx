@@ -22,12 +22,9 @@ const HomePage = () => {
           
           setNowShowing(showing);
           setComingSoon(upcoming);
-          // Highlight first now_showing or top rated movie
-          if (showing.length > 0) {
-            setFeaturedMovie(showing[0]);
-          } else if (movies.length > 0) {
-            setFeaturedMovie(movies[0]);
-          }
+          // Prioritize trending blockbuster (Ramayana or top rated now showing)
+          const trending = showing.find((m) => m.title.toLowerCase().includes('ramayana')) || showing[0] || movies[0];
+          setFeaturedMovie(trending);
         }
       } catch (err) {
         console.error('Failed to load homepage movies:', err);

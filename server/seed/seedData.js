@@ -56,6 +56,22 @@ const seedDatabase = async () => {
 
     // 2. Rich Movie Catalog (Hollywood + Premier Bollywood / Indian Blockbusters)
     const moviesData = [
+      // Top Trending Spotlight: Ramayana (From BookMyShow)
+      {
+        title: 'Ramayana',
+        description: 'The immortal story of Rama and Ravana defined a culture and moved generations. It now arrives as a cinematic landmark of our time. Ramayana is a timeless saga reborn through the lens of modern Indian cinema.',
+        poster: '/posters/ramayana_poster.jpg',
+        backdrop: '/posters/ramayana_backdrop.jpg',
+        genre: ['Action', 'Adventure', 'Drama', 'Mythological'],
+        language: 'Hindi',
+        duration: 195,
+        releaseDate: new Date('2026-11-05'),
+        rating: 9.2,
+        certification: 'U',
+        director: 'Nitesh Tiwari',
+        cast: ['Ranbir Kapoor', 'Sai Pallavi', 'Yash', 'Sunny Deol'],
+        status: 'now_showing',
+      },
       // Bollywood Blockbusters
       {
         title: 'Jawan: Extended Cut',
